@@ -74,6 +74,8 @@ export class BookingService {
       trainThatBook: train,
       bookedRoute: route,
       bookedSeats: seats,
+      seatCount: seats.length,
+      bookingDate: new Date().toISOString(), // storing as string in ISO format
     });
   
     const savedBooking = await this.bookingRepo.save(booking);

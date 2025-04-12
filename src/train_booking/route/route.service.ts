@@ -33,6 +33,7 @@ export class RouteService {
       arrivalStationId,
     } = createRouteDto;
 
+
     const train = await this.trainRepo.findOne({ where: { trainId } });
     if (!train) throw new NotFoundException('Train not found');
 
@@ -53,7 +54,7 @@ export class RouteService {
         trainTakingRoute: { trainId },
         departureStation: { stationId: departureStationId },
         arrivalStation: { stationId: arrivalStationId },
-        departureDate: new Date(departureDate), // Convert string to Date
+        departureDate, 
       },
     });
 
@@ -64,7 +65,7 @@ export class RouteService {
     }
 
     const newRoute = this.routeRepo.create({
-      departureDate,
+      departureDate, 
       departureTime,
       arrivalTime,
       trainTakingRoute: train,
@@ -83,8 +84,10 @@ export class RouteService {
 
   // ✅ FIND ALL
   async findAll(): Promise<any> {
-    const routes = await this.routeRepo.find();
-
+    const routes = await this.routeRepo.find({
+      relations: ['trainTakingRoute'], // This loads the train data
+    });
+  
     return {
       message: 'Routes fetched successfully',
       data: routes,

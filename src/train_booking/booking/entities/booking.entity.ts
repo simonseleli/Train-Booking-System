@@ -16,7 +16,7 @@ export class Booking {
   seatCount: number;
 
   @Column()
-  bookingDate: Date;
+  bookingDate: string;
 
   @Column({ default: 'draft' })
   state: 'draft' | 'confirmed' | 'cancelled';

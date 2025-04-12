@@ -11,7 +11,7 @@ export class Route {
   routeId: number;
 
   @Column({ type: 'date' })
-  departureDate: Date;  // Use 'date' for the departure day
+  departureDate: string;  // Use 'date' for the departure day
 
   @Column({ type: 'time' })
   departureTime: string;  // Use 'time' for precise time (HH:MM:SS)
